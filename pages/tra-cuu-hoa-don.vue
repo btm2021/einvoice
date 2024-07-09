@@ -27,6 +27,11 @@
                                     <b-form-input autocomplete="off" placeholder="Nhập mã hóa đơn"></b-form-input>
                                 </b-form-group>
                             </div>
+                            <div class="forms-inputs mb-4">
+                                <b-form-group label="Khóa bí mật">
+                                    <b-form-input autocomplete="off" placeholder="Nhập mã hóa đơn"></b-form-input>
+                                </b-form-group>
+                            </div>
                             <div class="forms-inputs mb-4 row">
                                 <div class="col-5">
                                     <b-form-group label="Captcha">
