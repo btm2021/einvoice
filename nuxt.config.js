@@ -36,8 +36,21 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
+    'nuxt2-turnstile',
   ],
-
+  privateRuntimeConfig: {
+    turnstile: {
+      // DO NOT PUT THIS IN PUBLIC RUNTIME CONFIG
+      secretKey: '0x4AAAAAAAex9MDweNturxSVJ41et6udTrY',
+    },
+  },
+  publicRuntimeConfig: {
+    turnstile: {
+      siteKey: '0x4AAAAAAAex9B8GEJtyI4Mh',
+    },
+  },
+  
+ 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }

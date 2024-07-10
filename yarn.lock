@@ -5705,6 +5705,11 @@ nth-check@^2.0.1:
   dependencies:
     boolbase "^1.0.0"
 
+nuxt2-turnstile@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/nuxt2-turnstile/-/nuxt2-turnstile-0.1.5.tgz#13c9704f6d0c60bffc6e7e3b8273098a95da7777"
+  integrity sha512-HbOMQcCazi4ipkmZ74ztFQ+JAqXXvV87YCS2qgJElY6pzS7N7RnIHlhBhZBV7S6CppYhTDOiCR0amiXxpjGDxA==
+
 nuxt@^2.15.8:
   version "2.17.3"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-2.17.3.tgz#68e9bef3287f7f6fa58aed7e753c14167593f631"
