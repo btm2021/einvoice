@@ -37,8 +37,7 @@
                                     </b-form-group>
                                 </div>
                                 <div class=" forms-inputs mb-4">
-                                    <vue-hcaptcha siteCoc="_0x29d5d5" sitekey="0b845a94-0610-4bf4-ac36-5dbc5374b63a"
-                                        @verify="okForm" language="vi"></vue-hcaptcha>
+                                    <recaptcha v-model="token" />
                                 </div>
 
                                 <div class="mb-3"> <b-button variant="primary" type="submit" block>Tra cứu </b-button>
@@ -60,46 +59,18 @@
 
 <script>
 
-function encode(str, key) {
-    let result = '';
-    for (let i = 0; i < str.length; i++) {
-        let charCode = str.charCodeAt(i);
-        let keyChar = key.charCodeAt(i % key.length);
-        result += String.fromCodePoint(charCode ^ keyChar);
-    }
-    // Chuyển đổi kết quả sang Base64
-    return btoa(unescape(encodeURIComponent(result)));
-}
 
-function decode(str, key) {
-    // Giải mã Base64
-    let decodedBase64 = decodeURIComponent(escape(atob(str)));
-
-    let result = '';
-    for (let i = 0; i < decodedBase64.length; i++) {
-        let charCode = decodedBase64.charCodeAt(i);
-        let keyChar = key.charCodeAt(i % key.length);
-        result += String.fromCodePoint(charCode ^ keyChar);
-    }
-    return result;
-}
-function getLastNum(ts) {
-    let a = String(ts)
-    return a[a.length - 1]
-}
-import VueHcaptcha from '@hcaptcha/vue-hcaptcha';
 export default {
-    components: { VueHcaptcha },
     data() {
         return {
-            isvalid: false,
             token: null,
             msg: '',
             form: {
-                mahoadon: '12312',
-                passcode: '121312',
+                mahoadon: null,
+                passcode: null,
             },
             overlay: false,
+
 
         }
     },
@@ -117,62 +88,21 @@ export default {
 
     },
     methods: {
-
-        okForm() {
-            this.isvalid = true;
-        },
+    
         async onSubmit() {
-            let ts = String(new Date().getTime())
-            let ob = {
-                short: this.form.mahoadon,
-                passcode: this.form.passcode
-            }
-            let a = encode(JSON.stringify(ob), ts)
-            console.log(a)
-            let url = 'https://einvoice.trinhminhbao.workers.dev'
-            url = 'http://127.0.0.1:8787/gethoadon'
-
-            fetch(url, {
-                method: "POST",
-                headers: {
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "GET,HEAD,POST,OPTIONS",
-                    'cf-authorization': `${encode('baotm', ts)}`,
-                    'cf-timestamp': ts,
-                    'content-type': 'text/html'
-                },
-                body: a,
-            }).then(data => data.json()).then(data => {
-                console.log(data)
-            })
-
-        },
-        async sendEncodedData(url, data) {
-            const encodedInfo = encode(JSON.stringify(data));
-            let d = new Date().getTime()
             try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${this.encode(d)}`,
-                        'Authorization-timestamp': d
-                    },
-                    body: JSON.stringify({ info: encodedInfo })
-                });
+                const token = await this.$recaptcha.getResponse()
+                console.log('ReCaptcha token:', token)
+                let f = await fetch(`https://einvoice.trinhminhbao.workers.dev/gethoadon?s=baotm&short=${this.form.mahoadon}&passcode${this.form.passcode}`)
+                let i = f.json()
+                console.log(i)
+                //ok
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const responseData = await response.json();
-                return responseData;
+                await this.$recaptcha.reset()
             } catch (error) {
-                console.error('Có lỗi khi gửi dữ liệu:', error);
-                throw error;
+                console.log('Login error:', error)
             }
         }
-
     }
 }
 </script>

@@ -1,3 +1,4 @@
+
 export default {
   ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -36,22 +37,53 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
-    'nuxt2-turnstile',
+    '@nuxtjs/axios'
   ],
-  privateRuntimeConfig: {
-    turnstile: {
-      // DO NOT PUT THIS IN PUBLIC RUNTIME CONFIG
-      secretKey: '0x4AAAAAAAex9MDweNturxSVJ41et6udTrY',
-    },
-  },
-  publicRuntimeConfig: {
-    turnstile: {
-      siteKey: '0x4AAAAAAAex9B8GEJtyI4Mh',
-    },
-  },
-  
- 
+
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
   }
 }
+
+// function encode(str, key) {
+
+//     let result = '';
+//     for (let i = 0; i < str.length; i++) {
+//         const charCode = str.charCodeAt(i) ^ key.charCodeAt(i % key.length);
+//         result += String.fromCharCode(charCode);
+//     }
+//     return btoa(result);
+// }
+
+// function
+//     decode(encodedStr, key) {
+//     const str = atob(encodedStr); // Giải mã Base64
+//     let result = '';
+//     for (let i = 0; i < str.length; i++) {
+//         const charCode = str.charCodeAt(i) ^ key.charCodeAt(i % key.length);
+//         result += String.fromCharCode(charCode);
+//     }
+//     return result;
+// }
+
+
+// function _0x532783(str, key) {
+
+// let result = '';
+// for (let i = 0; i < str.length; i++) {
+//     const charCode = str.charCodeAt(i) ^ key.charCodeAt(i % key.length);
+//     result += String.fromCharCode(charCode);
+// }
+// return btoa(result);
+// }
+
+// function
+// _0x294ba2(encodedStr, key) {
+// const str = atob(encodedStr); // Giải mã Base64
+// let result = '';
+// for (let i = 0; i < str.length; i++) {
+//     const charCode = str.charCodeAt(i) ^ key.charCodeAt(i % key.length);
+//     result += String.fromCharCode(charCode);
+// }
+// return result;
+// }
