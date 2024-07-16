@@ -301,8 +301,8 @@ export default {
 }
 
 .tblWidth20 {
-    width: 20%;
-    max-width: 20%;
+    width: 50%;
+    max-width: 50%;
     font-weight: bold;
 }
 
