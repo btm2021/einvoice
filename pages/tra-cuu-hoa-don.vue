@@ -171,8 +171,8 @@ export default {
             token: null,
             msg: '',
             form: {
-                mahoadon: 'EPG7RGDN4Y',
-                passcode: '832149',
+                mahoadon: null,
+                passcode: null,
             },
             overlay: false,
 
