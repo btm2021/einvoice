@@ -28,7 +28,7 @@
                                 <div class="forms-inputs mb-4">
                                     <b-form-group label="Mã hóa đơn">
                                         <b-form-input type="search"
-                                        style="text-transform: uppercase;"
+                                        
                                             v-model="form.mahoadon" autocomplete="off"
                                             placeholder="Nhập mã hóa đơn"></b-form-input>
                                     </b-form-group>
@@ -40,8 +40,7 @@
                                     </b-form-group>
                                 </div>
                                 <div class=" forms-inputs mb-4">
-                                    <vue-hcaptcha siteCoc="_0x29d5d5" sitekey="0b845a94-0610-4bf4-ac36-5dbc5374b63a"
-                                        @verify="okForm" language="vi"></vue-hcaptcha>
+                                  
                                 </div>
 
                                 <div class="mb-3"> <b-button variant="primary" type="submit" block>Tra cứu </b-button>
@@ -155,7 +154,6 @@ function getLastNum(ts) {
 }
 import VueHcaptcha from '@hcaptcha/vue-hcaptcha';
 export default {
-    components: { VueHcaptcha },
     data() {
         return {
             fieldtable: [
@@ -172,8 +170,8 @@ export default {
             token: null,
             msg: '',
             form: {
-                mahoadon: null,
-                passcode: null,
+                mahoadon: 'WOKZPDZZJ9',
+                passcode: '940802',
             },
             overlay: false,
 
@@ -229,17 +227,18 @@ export default {
             this.isvalid = true;
         },
         async onSubmit() {
+            this.isvalid=true
             if (this.isvalid) {
 
                 let ts = String(new Date().getTime())
                 let ob = {
-                    short: String(this.form.mahoadon).toUpperCase(),
-                    passcode: this.form.passcode
+                    short: (this.form.mahoadon),
+                    passcode: (this.form.passcode)
                 }
                 let a = encode(JSON.stringify(ob), ts)
-                console.log(ob)
+                console.log(a)
                 let url = 'https://einvoice.trinhminhbao.workers.dev/gethoadon'
-            
+               // url = 'http://localhost:8787/gethoadon'
              fetch(url, {
                     method: "POST",
                     headers: {
